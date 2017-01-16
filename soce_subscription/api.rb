@@ -9,11 +9,11 @@ module SoceSubscription
     format :json
     prefix :api
 
-    http_basic do |user, password|
-      user == ENV['SOCE_API_USER'] && ENV['SOCE_API_PASSWORD']
-    end
 
     resource :subscription_status do
+      http_basic do |user, password|
+        user == ENV['SOCE_API_USER'] && ENV['SOCE_API_PASSWORD']
+      end
 
       desc 'Return subscription status of given user '
       params do
