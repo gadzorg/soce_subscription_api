@@ -1,4 +1,8 @@
+$:.unshift File.dirname(__FILE__)
+
 require 'grape'
+require 'grape-swagger'
+require 'soce/user'
 
 module SoceSubscription
   class API < Grape::API
@@ -17,10 +21,17 @@ module SoceSubscription
       end
       route_param :uuid do
         get do
-          { hello: 'world' }
+          user=Soce::User.find_by(uuid:  params[:uuid])
+          if user
+            user.subscription_hash
+          else
+            error! :not_found, 404
+          end
         end
       end
     end
+
+    add_swagger_documentation mount_path: '/doc'
 
   end
 end
