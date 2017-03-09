@@ -15,20 +15,21 @@ module SoceSubscription
         user == ENV['SOCE_API_USER'] && ENV['SOCE_API_PASSWORD']
       end
 
-      desc 'Return subscription status of given user '
-      params do
-        requires :uuid, type: String , desc: 'user uuid.'
-      end
-      route_param :uuid do
-        get do
-          user=Soce::User.find_by(uuid:  params[:uuid])
+      # desc 'Return subscription status of given user '
+      # params do
+      #   requires :hruid, :regexp => /.*/, desc: 'user uuid.'
+      # end
+      # route_param :hruid do
+        get ':hruid', :requirements => { :hruid => /.*/ } do
+          puts params[:hruid]
+          user=Soce::User.find_by(hruid:  params[:hruid])
           if user
             user.subscription_hash
           else
             error! :not_found, 404
           end
         end
-      end
+      # end
     end
 
     add_swagger_documentation mount_path: '/doc'

@@ -7,7 +7,7 @@ module Soce
     self.table_name = "users"
 
     def is_amm_subscriber
-      type_abt > 0
+      type_abt.to_i > 0
     end
 
     def subscription_type
@@ -43,7 +43,11 @@ module Soce
     def subscription_hash
       hash={
           uuid: uuid,
+          id_soce: id_user,
           is_subscriber: is_amm_subscriber,
+          firstname: prenom,
+          lastname: nom,
+          email: email
       }
       if is_amm_subscriber
         hash[:subscription_type]=subscription_type
