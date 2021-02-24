@@ -69,5 +69,8 @@ DEPENDENCIES
   grape-swagger
   mysql2
 
+RUBY VERSION
+   ruby 2.7.2p137
+
 BUNDLED WITH
-   1.13.6
+   1.14.6
